@@ -19,6 +19,14 @@ def simulate_strategy(strategy, ticker, current_price, historical_data, account_
    else:
       return 'hold', 0
 
+"""
+Interfaces for using TA-Lib indicators. 
+
+The functions are named as the indicator name + _indicator.
+The functions take a ticker and a pandas dataframe as input.
+The dataframe must have a 'Date' column and a 'Close' column.
+The functions return a string 'Buy', 'Sell', or 'Hold'.
+"""
 
 # Overlap Studies
 def BBANDS_indicator(ticker:str, data:pd.DataFrame)->str:  
@@ -34,7 +42,7 @@ def BBANDS_indicator(ticker:str, data:pd.DataFrame)->str:
       return 'Buy'  
    else:  
       return 'Hold'  
-  
+
 def DEMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Double Exponential Moving Average (DEMA) indicator."""  
       
