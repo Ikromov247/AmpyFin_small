@@ -24,7 +24,7 @@ Interfaces for using TA-Lib indicators.
 
 The functions are named as the indicator name + _indicator.
 The functions take a ticker and a pandas dataframe as input.
-The dataframe must have a 'Date' column and a 'Close' column.
+The dataframe must have a 'date' column and a 'close' column.
 The functions return a string 'Buy', 'Sell', or 'Hold'.
 """
 
@@ -32,13 +32,13 @@ The functions return a string 'Buy', 'Sell', or 'Hold'.
 def BBANDS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Bollinger Bands (BBANDS) indicator."""  
       
-   upper, middle, lower = ta.BBANDS(data['Close'], timeperiod=20)  
+   upper, middle, lower = ta.BBANDS(data['close'], timeperiod=20)  
    # sells when the current price is above the upper band
    # and buys when the current price is below the lower band
    # otherwise, hold
-   if data['Close'].iloc[-1] > upper.iloc[-1]:  
+   if data['close'].iloc[-1] > upper.iloc[-1]:  
       return 'Sell'  
-   elif data['Close'].iloc[-1] < lower.iloc[-1]:  
+   elif data['close'].iloc[-1] < lower.iloc[-1]:  
       return 'Buy'  
    else:  
       return 'Hold'  
@@ -46,10 +46,10 @@ def BBANDS_indicator(ticker:str, data:pd.DataFrame)->str:
 def DEMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Double Exponential Moving Average (DEMA) indicator."""  
       
-   dema = ta.DEMA(data['Close'], timeperiod=30)  
-   if data['Close'].iloc[-1] > dema.iloc[-1]:  
+   dema = ta.DEMA(data['close'], timeperiod=30)  
+   if data['close'].iloc[-1] > dema.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < dema.iloc[-1]:  
+   elif data['close'].iloc[-1] < dema.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -57,10 +57,10 @@ def DEMA_indicator(ticker:str, data:pd.DataFrame)->str:
 def EMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Exponential Moving Average (EMA) indicator."""  
       
-   ema = ta.EMA(data['Close'], timeperiod=30)  
-   if data['Close'].iloc[-1] > ema.iloc[-1]:  
+   ema = ta.EMA(data['close'], timeperiod=30)  
+   if data['close'].iloc[-1] > ema.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < ema.iloc[-1]:  
+   elif data['close'].iloc[-1] < ema.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -68,10 +68,10 @@ def EMA_indicator(ticker:str, data:pd.DataFrame)->str:
 def HT_TRENDLINE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hilbert Transform - Instantaneous Trendline (HT_TRENDLINE) indicator."""  
       
-   ht_trendline = ta.HT_TRENDLINE(data['Close'])  
-   if data['Close'].iloc[-1] > ht_trendline.iloc[-1]:  
+   ht_trendline = ta.HT_TRENDLINE(data['close'])  
+   if data['close'].iloc[-1] > ht_trendline.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < ht_trendline.iloc[-1]:  
+   elif data['close'].iloc[-1] < ht_trendline.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -79,10 +79,10 @@ def HT_TRENDLINE_indicator(ticker:str, data:pd.DataFrame)->str:
 def KAMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Kaufman Adaptive Moving Average (KAMA) indicator."""  
       
-   kama = ta.KAMA(data['Close'], timeperiod=30)  
-   if data['Close'].iloc[-1] > kama.iloc[-1]:  
+   kama = ta.KAMA(data['close'], timeperiod=30)  
+   if data['close'].iloc[-1] > kama.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < kama.iloc[-1]:  
+   elif data['close'].iloc[-1] < kama.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -90,10 +90,10 @@ def KAMA_indicator(ticker:str, data:pd.DataFrame)->str:
 def MA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Moving average (MA) indicator."""  
       
-   ma = ta.MA(data['Close'], timeperiod=30, matype=0)  
-   if data['Close'].iloc[-1] > ma.iloc[-1]:  
+   ma = ta.MA(data['close'], timeperiod=30, matype=0)  
+   if data['close'].iloc[-1] > ma.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < ma.iloc[-1]:  
+   elif data['close'].iloc[-1] < ma.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -109,7 +109,7 @@ def MAMA_indicator(ticker:str, data:pd.DataFrame)->str:
     - str: 'Buy', 'Sell', or 'Hold'.
     """
    
-    close_prices = data['Close'].values
+    close_prices = data['close'].values
 
     # Validate enough data
     """
@@ -145,7 +145,7 @@ def MAVP_indicator(ticker:str, data:pd.DataFrame)->str:
     - str: 'Buy', 'Sell', or 'Hold'.
     """
      
-    close_prices = data['Close'].values
+    close_prices = data['close'].values
     """
     # Validate enough data
     if len(close_prices) < 30:  # Ensure enough data for MAVP calculation
@@ -175,10 +175,10 @@ def MAVP_indicator(ticker:str, data:pd.DataFrame)->str:
 def MIDPOINT_indicator(ticker:str, data:pd.DataFrame)->str:  
    """MidPoint over period (MIDPOINT) indicator."""  
       
-   midpoint = ta.MIDPOINT(data['Close'], timeperiod=14)  
-   if data['Close'].iloc[-1] > midpoint.iloc[-1]:  
+   midpoint = ta.MIDPOINT(data['close'], timeperiod=14)  
+   if data['close'].iloc[-1] > midpoint.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < midpoint.iloc[-1]:  
+   elif data['close'].iloc[-1] < midpoint.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -186,10 +186,10 @@ def MIDPOINT_indicator(ticker:str, data:pd.DataFrame)->str:
 def MIDPRICE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Midpoint Price over period (MIDPRICE) indicator."""  
       
-   midprice = ta.MIDPRICE(data['High'], data['Low'], timeperiod=14)  
-   if data['Close'].iloc[-1] > midprice.iloc[-1]:  
+   midprice = ta.MIDPRICE(data['high'], data['low'], timeperiod=14)  
+   if data['close'].iloc[-1] > midprice.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < midprice.iloc[-1]:  
+   elif data['close'].iloc[-1] < midprice.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -197,10 +197,10 @@ def MIDPRICE_indicator(ticker:str, data:pd.DataFrame)->str:
 def SAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Parabolic SAR (SAR) indicator."""  
       
-   sar = ta.SAR(data['High'], data['Low'], acceleration=0, maximum=0)  
-   if data['Close'].iloc[-1] > sar.iloc[-1]:  
+   sar = ta.SAR(data['high'], data['low'], acceleration=0, maximum=0)  
+   if data['close'].iloc[-1] > sar.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < sar.iloc[-1]:  
+   elif data['close'].iloc[-1] < sar.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -208,10 +208,14 @@ def SAR_indicator(ticker:str, data:pd.DataFrame)->str:
 def SAREXT_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Parabolic SAR - Extended (SAREXT) indicator."""  
       
-   sarext = ta.SAREXT(data['High'], data['Low'], startvalue=0, offsetonreverse=0, accelerationinitlong=0, accelerationlong=0, accelerationmaxlong=0, accelerationinitshort=0, accelerationshort=0, accelerationmaxshort=0)  
-   if data['Close'].iloc[-1] > sarext.iloc[-1]:  
+   sarext = ta.SAREXT(data['high'], data['low'], 
+                      startvalue=0, offsetonreverse=0, 
+                      accelerationinitlong=0, accelerationlong=0, 
+                      accelerationmaxlong=0, accelerationinitshort=0, 
+                      accelerationshort=0, accelerationmaxshort=0)  
+   if data['close'].iloc[-1] > sarext.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < sarext.iloc[-1]:  
+   elif data['close'].iloc[-1] < sarext.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -219,10 +223,10 @@ def SAREXT_indicator(ticker:str, data:pd.DataFrame)->str:
 def SMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Simple Moving Average (SMA) indicator."""  
       
-   sma = ta.SMA(data['Close'], timeperiod=30)  
-   if data['Close'].iloc[-1] > sma.iloc[-1]:  
+   sma = ta.SMA(data['close'], timeperiod=30)  
+   if data['close'].iloc[-1] > sma.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < sma.iloc[-1]:  
+   elif data['close'].iloc[-1] < sma.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -230,10 +234,10 @@ def SMA_indicator(ticker:str, data:pd.DataFrame)->str:
 def T3_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Triple Exponential Moving Average (T3) indicator."""  
       
-   t3 = ta.T3(data['Close'], timeperiod=30, vfactor=0)  
-   if data['Close'].iloc[-1] > t3.iloc[-1]:  
+   t3 = ta.T3(data['close'], timeperiod=30, vfactor=0)  
+   if data['close'].iloc[-1] > t3.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < t3.iloc[-1]:  
+   elif data['close'].iloc[-1] < t3.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -241,10 +245,10 @@ def T3_indicator(ticker:str, data:pd.DataFrame)->str:
 def TEMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Triple Exponential Moving Average (TEMA) indicator."""  
       
-   tema = ta.TEMA(data['Close'], timeperiod=30)  
-   if data['Close'].iloc[-1] > tema.iloc[-1]:  
+   tema = ta.TEMA(data['close'], timeperiod=30)  
+   if data['close'].iloc[-1] > tema.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < tema.iloc[-1]:  
+   elif data['close'].iloc[-1] < tema.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -252,10 +256,10 @@ def TEMA_indicator(ticker:str, data:pd.DataFrame)->str:
 def TRIMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Triangular Moving Average (TRIMA) indicator."""  
       
-   trima = ta.TRIMA(data['Close'], timeperiod=30)  
-   if data['Close'].iloc[-1] > trima.iloc[-1]:  
+   trima = ta.TRIMA(data['close'], timeperiod=30)  
+   if data['close'].iloc[-1] > trima.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < trima.iloc[-1]:  
+   elif data['close'].iloc[-1] < trima.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -263,10 +267,10 @@ def TRIMA_indicator(ticker:str, data:pd.DataFrame)->str:
 def WMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Weighted Moving Average (WMA) indicator."""  
       
-   wma = ta.WMA(data['Close'], timeperiod=30)  
-   if data['Close'].iloc[-1] > wma.iloc[-1]:  
+   wma = ta.WMA(data['close'], timeperiod=30)  
+   if data['close'].iloc[-1] > wma.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < wma.iloc[-1]:  
+   elif data['close'].iloc[-1] < wma.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -276,7 +280,7 @@ def WMA_indicator(ticker:str, data:pd.DataFrame)->str:
 def ADX_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Average Directional Movement Index (ADX) indicator."""  
       
-   adx = ta.ADX(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   adx = ta.ADX(data['high'], data['low'], data['close'], timeperiod=14)  
    if adx.iloc[-1] > 25:  
       return 'Buy'  
    elif adx.iloc[-1] < 20:  
@@ -287,7 +291,7 @@ def ADX_indicator(ticker:str, data:pd.DataFrame)->str:
 def ADXR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Average Directional Movement Index Rating (ADXR) indicator."""  
       
-   adxr = ta.ADXR(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   adxr = ta.ADXR(data['high'], data['low'], data['close'], timeperiod=14)  
    if adxr.iloc[-1] > 25:  
       return 'Buy'  
    elif adxr.iloc[-1] < 20:  
@@ -298,7 +302,7 @@ def ADXR_indicator(ticker:str, data:pd.DataFrame)->str:
 def APO_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Absolute Price Oscillator (APO) indicator."""  
       
-   apo = ta.APO(data['Close'], fastperiod=12, slowperiod=26, matype=0)  
+   apo = ta.APO(data['close'], fastperiod=12, slowperiod=26, matype=0)  
    if apo.iloc[-1] > 0:  
       return 'Buy'  
    elif apo.iloc[-1] < 0:  
@@ -309,7 +313,7 @@ def APO_indicator(ticker:str, data:pd.DataFrame)->str:
 def AROON_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Aroon (AROON) indicator."""  
       
-   aroon_down, aroon_up = ta.AROON(data['High'], data['Low'], timeperiod=14)  
+   aroon_down, aroon_up = ta.AROON(data['high'], data['low'], timeperiod=14)  
    if aroon_up.iloc[-1] > 70:  
       return 'Buy'  
    elif aroon_down.iloc[-1] > 70:  
@@ -320,7 +324,7 @@ def AROON_indicator(ticker:str, data:pd.DataFrame)->str:
 def AROONOSC_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Aroon Oscillator (AROONOSC) indicator."""  
       
-   aroonosc = ta.AROONOSC(data['High'], data['Low'], timeperiod=14)  
+   aroonosc = ta.AROONOSC(data['high'], data['low'], timeperiod=14)  
    if aroonosc.iloc[-1] > 0:  
       return 'Buy'  
    elif aroonosc.iloc[-1] < 0:  
@@ -331,7 +335,7 @@ def AROONOSC_indicator(ticker:str, data:pd.DataFrame)->str:
 def BOP_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Balance Of Power (BOP) indicator."""  
       
-   bop = ta.BOP(data['Open'], data['High'], data['Low'], data['Close'])  
+   bop = ta.BOP(data['open'], data['high'], data['low'], data['close'])  
    if bop.iloc[-1] > 0:  
       return 'Buy'  
    elif bop.iloc[-1] < 0:  
@@ -342,7 +346,7 @@ def BOP_indicator(ticker:str, data:pd.DataFrame)->str:
 def CCI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Commodity Channel Index (CCI) indicator."""  
       
-   cci = ta.CCI(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   cci = ta.CCI(data['high'], data['low'], data['close'], timeperiod=14)  
    if cci.iloc[-1] > 100:  
       return 'Buy'  
    elif cci.iloc[-1] < -100:  
@@ -353,7 +357,7 @@ def CCI_indicator(ticker:str, data:pd.DataFrame)->str:
 def CMO_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Chande Momentum Oscillator (CMO) indicator."""  
       
-   cmo = ta.CMO(data['Close'], timeperiod=14)  
+   cmo = ta.CMO(data['close'], timeperiod=14)  
    if cmo.iloc[-1] > 50:  
       return 'Buy'  
    elif cmo.iloc[-1] < -50:  
@@ -364,7 +368,7 @@ def CMO_indicator(ticker:str, data:pd.DataFrame)->str:
 def DX_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Directional Movement Index (DX) indicator."""  
       
-   dx = ta.DX(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   dx = ta.DX(data['high'], data['low'], data['close'], timeperiod=14)  
    if dx.iloc[-1] > 25:  
       return 'Buy'  
    elif dx.iloc[-1] < 20:  
@@ -375,7 +379,7 @@ def DX_indicator(ticker:str, data:pd.DataFrame)->str:
 def MACD_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Moving Average Convergence/Divergence (MACD) indicator."""  
       
-   macd, macdsignal, macdhist = ta.MACD(data['Close'], fastperiod=12, slowperiod=26, signalperiod=9)  
+   macd, macdsignal, macdhist = ta.MACD(data['close'], fastperiod=12, slowperiod=26, signalperiod=9)  
    if macdhist.iloc[-1] > 0:  
       return 'Buy'  
    elif macdhist.iloc[-1] < 0:  
@@ -386,7 +390,7 @@ def MACD_indicator(ticker:str, data:pd.DataFrame)->str:
 def MACDEXT_indicator(ticker:str, data:pd.DataFrame)->str:  
    """MACD with controllable MA type (MACDEXT) indicator."""  
       
-   macd, macdsignal, macdhist = ta.MACDEXT(data['Close'], fastperiod=12, fastmatype=0, slowperiod=26, slowmatype=0, signalperiod=9, signalmatype=0)  
+   macd, macdsignal, macdhist = ta.MACDEXT(data['close'], fastperiod=12, fastmatype=0, slowperiod=26, slowmatype=0, signalperiod=9, signalmatype=0)  
    if macdhist.iloc[-1] > 0:  
       return 'Buy'  
    elif macdhist.iloc[-1] < 0:  
@@ -397,7 +401,7 @@ def MACDEXT_indicator(ticker:str, data:pd.DataFrame)->str:
 def MACDFIX_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Moving Average Convergence/Divergence Fix 12/26 (MACDFIX) indicator."""  
       
-   macd, macdsignal, macdhist = ta.MACDFIX(data['Close'], signalperiod=9)  
+   macd, macdsignal, macdhist = ta.MACDFIX(data['close'], signalperiod=9)  
    if macdhist.iloc[-1] > 0:  
       return 'Buy'  
    elif macdhist.iloc[-1] < 0:  
@@ -408,7 +412,7 @@ def MACDFIX_indicator(ticker:str, data:pd.DataFrame)->str:
 def MFI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Money Flow Index (MFI) indicator."""  
       
-   mfi = ta.MFI(data['High'], data['Low'], data['Close'], data['Volume'], timeperiod=14)  
+   mfi = ta.MFI(data['high'], data['low'], data['close'], data['volume'], timeperiod=14)  
    if mfi.iloc[-1] > 80:  
       return 'Sell'  
    elif mfi.iloc[-1] < 20:  
@@ -419,7 +423,7 @@ def MFI_indicator(ticker:str, data:pd.DataFrame)->str:
 def MINUS_DI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Minus Directional Indicator (MINUS_DI) indicator."""  
       
-   minus_di = ta.MINUS_DI(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   minus_di = ta.MINUS_DI(data['high'], data['low'], data['close'], timeperiod=14)  
    if minus_di.iloc[-1] > 25:  
       return 'Sell'  
    elif minus_di.iloc[-1] < 20:  
@@ -430,7 +434,7 @@ def MINUS_DI_indicator(ticker:str, data:pd.DataFrame)->str:
 def MINUS_DM_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Minus Directional Movement (MINUS_DM) indicator."""  
       
-   minus_dm = ta.MINUS_DM(data['High'], data['Low'], timeperiod=14)  
+   minus_dm = ta.MINUS_DM(data['high'], data['low'], timeperiod=14)  
    if minus_dm.iloc[-1] > 0:  
       return 'Sell'  
    elif minus_dm.iloc[-1] < 0:  
@@ -441,7 +445,7 @@ def MINUS_DM_indicator(ticker:str, data:pd.DataFrame)->str:
 def MOM_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Momentum (MOM) indicator."""  
       
-   mom = ta.MOM(data['Close'], timeperiod=10)  
+   mom = ta.MOM(data['close'], timeperiod=10)  
    if mom.iloc[-1] > 0:  
       return 'Buy'  
    elif mom.iloc[-1] < 0:  
@@ -452,7 +456,7 @@ def MOM_indicator(ticker:str, data:pd.DataFrame)->str:
 def PLUS_DI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Plus Directional Indicator (PLUS_DI) indicator."""  
       
-   plus_di = ta.PLUS_DI(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   plus_di = ta.PLUS_DI(data['high'], data['low'], data['close'], timeperiod=14)  
    if plus_di.iloc[-1] > 25:  
       return 'Buy'  
    elif plus_di.iloc[-1] < 20:  
@@ -463,7 +467,7 @@ def PLUS_DI_indicator(ticker:str, data:pd.DataFrame)->str:
 def PLUS_DM_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Plus Directional Movement (PLUS_DM) indicator."""  
       
-   plus_dm = ta.PLUS_DM(data['High'], data['Low'], timeperiod=14)  
+   plus_dm = ta.PLUS_DM(data['high'], data['low'], timeperiod=14)  
    if plus_dm.iloc[-1] > 0:  
       return 'Buy'  
    elif plus_dm.iloc[-1] < 0:  
@@ -474,7 +478,7 @@ def PLUS_DM_indicator(ticker:str, data:pd.DataFrame)->str:
 def PPO_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Percentage Price Oscillator (PPO) indicator."""  
       
-   ppo = ta.PPO(data['Close'], fastperiod=12, slowperiod=26, matype=0)  
+   ppo = ta.PPO(data['close'], fastperiod=12, slowperiod=26, matype=0)  
    if ppo.iloc[-1] > 0:  
       return 'Buy'  
    elif ppo.iloc[-1] < 0:  
@@ -485,7 +489,7 @@ def PPO_indicator(ticker:str, data:pd.DataFrame)->str:
 def ROC_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Rate of change : ((price/prevPrice)-1)*100 (ROC) indicator."""  
       
-   roc = ta.ROC(data['Close'], timeperiod=10)  
+   roc = ta.ROC(data['close'], timeperiod=10)  
    if roc.iloc[-1] > 0:  
       return 'Buy'  
    elif roc.iloc[-1] < 0:  
@@ -496,7 +500,7 @@ def ROC_indicator(ticker:str, data:pd.DataFrame)->str:
 def ROCP_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Rate of change Percentage: (price-prevPrice)/prevPrice (ROCP) indicator."""  
       
-   rocp = ta.ROCP(data['Close'], timeperiod=10)  
+   rocp = ta.ROCP(data['close'], timeperiod=10)  
    if rocp.iloc[-1] > 0:  
       return 'Buy'  
    elif rocp.iloc[-1] < 0:  
@@ -507,7 +511,7 @@ def ROCP_indicator(ticker:str, data:pd.DataFrame)->str:
 def ROCR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Rate of change ratio: (price/prevPrice) (ROCR) indicator."""  
       
-   rocr = ta.ROCR(data['Close'], timeperiod=10)  
+   rocr = ta.ROCR(data['close'], timeperiod=10)  
    if rocr.iloc[-1] > 1:  
       return 'Buy'  
    elif rocr.iloc[-1] < 1:  
@@ -518,7 +522,7 @@ def ROCR_indicator(ticker:str, data:pd.DataFrame)->str:
 def ROCR100_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Rate of change ratio 100 scale: (price/prevPrice)*100 (ROCR100) indicator."""  
       
-   rocr100 = ta.ROCR100(data['Close'], timeperiod=10)  
+   rocr100 = ta.ROCR100(data['close'], timeperiod=10)  
    if rocr100.iloc[-1] > 100:  
       return 'Buy'  
    elif rocr100.iloc[-1] < 100:  
@@ -529,7 +533,7 @@ def ROCR100_indicator(ticker:str, data:pd.DataFrame)->str:
 def RSI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Relative Strength Index (RSI) indicator."""  
       
-   rsi = ta.RSI(data['Close'], timeperiod=14)  
+   rsi = ta.RSI(data['close'], timeperiod=14)  
    if rsi.iloc[-1] > 70:  
       return 'Sell'  
    elif rsi.iloc[-1] < 30:  
@@ -540,7 +544,7 @@ def RSI_indicator(ticker:str, data:pd.DataFrame)->str:
 def STOCH_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Stochastic (STOCH) indicator."""  
       
-   slowk, slowd = ta.STOCH(data['High'], data['Low'], data['Close'], fastk_period=5, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0)  
+   slowk, slowd = ta.STOCH(data['high'], data['low'], data['close'], fastk_period=5, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0)  
    if slowk.iloc[-1] > 80:  
       return 'Sell'  
    elif slowk.iloc[-1] < 20:  
@@ -551,7 +555,7 @@ def STOCH_indicator(ticker:str, data:pd.DataFrame)->str:
 def STOCHF_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Stochastic Fast (STOCHF) indicator."""  
       
-   fastk, fastd = ta.STOCHF(data['High'], data['Low'], data['Close'], fastk_period=5, fastd_period=3, fastd_matype=0)  
+   fastk, fastd = ta.STOCHF(data['high'], data['low'], data['close'], fastk_period=5, fastd_period=3, fastd_matype=0)  
    if fastk.iloc[-1] > 80:  
       return 'Sell'  
    elif fastk.iloc[-1] < 20:  
@@ -562,7 +566,7 @@ def STOCHF_indicator(ticker:str, data:pd.DataFrame)->str:
 def STOCHRSI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Stochastic Relative Strength Index (STOCHRSI) indicator."""  
       
-   fastk, fastd = ta.STOCHRSI(data['Close'], timeperiod=14, fastk_period=5, fastd_period=3, fastd_matype=0)  
+   fastk, fastd = ta.STOCHRSI(data['close'], timeperiod=14, fastk_period=5, fastd_period=3, fastd_matype=0)  
    if fastk.iloc[-1] > 80:  
       return 'Sell'  
    elif fastk.iloc[-1] < 20:  
@@ -573,7 +577,7 @@ def STOCHRSI_indicator(ticker:str, data:pd.DataFrame)->str:
 def TRIX_indicator(ticker:str, data:pd.DataFrame)->str:  
    """1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (TRIX) indicator."""  
       
-   trix = ta.TRIX(data['Close'], timeperiod=30)  
+   trix = ta.TRIX(data['close'], timeperiod=30)  
    if trix.iloc[-1] > 0:  
       return 'Buy'  
    elif trix.iloc[-1] < 0:  
@@ -584,7 +588,7 @@ def TRIX_indicator(ticker:str, data:pd.DataFrame)->str:
 def ULTOSC_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Ultimate Oscillator (ULTOSC) indicator."""  
       
-   ultosc = ta.ULTOSC(data['High'], data['Low'], data['Close'], timeperiod1=7, timeperiod2=14, timeperiod3=28)  
+   ultosc = ta.ULTOSC(data['high'], data['low'], data['close'], timeperiod1=7, timeperiod2=14, timeperiod3=28)  
    if ultosc.iloc[-1] > 70:  
       return 'Sell'  
    elif ultosc.iloc[-1] < 30:  
@@ -595,7 +599,7 @@ def ULTOSC_indicator(ticker:str, data:pd.DataFrame)->str:
 def WILLR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Williams' %R (WILLR) indicator."""  
       
-   willr = ta.WILLR(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   willr = ta.WILLR(data['high'], data['low'], data['close'], timeperiod=14)  
    if willr.iloc[-1] > -20:  
       return 'Sell'  
    elif willr.iloc[-1] < -80:  
@@ -608,7 +612,7 @@ def WILLR_indicator(ticker:str, data:pd.DataFrame)->str:
 def AD_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Chaikin A/D Line (AD) indicator."""  
       
-   ad = ta.AD(data['High'], data['Low'], data['Close'], data['Volume'])  
+   ad = ta.AD(data['high'], data['low'], data['close'], data['volume'])  
    if ad.iloc[-1] > 0:  
       return 'Buy'  
    elif ad.iloc[-1] < 0:  
@@ -619,7 +623,7 @@ def AD_indicator(ticker:str, data:pd.DataFrame)->str:
 def ADOSC_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Chaikin A/D Oscillator (ADOSC) indicator."""  
       
-   adosc = ta.ADOSC(data['High'], data['Low'], data['Close'], data['Volume'], fastperiod=3, slowperiod=10)  
+   adosc = ta.ADOSC(data['high'], data['low'], data['close'], data['volume'], fastperiod=3, slowperiod=10)  
    if adosc.iloc[-1] > 0:  
       return 'Buy'  
    elif adosc.iloc[-1] < 0:  
@@ -630,7 +634,7 @@ def ADOSC_indicator(ticker:str, data:pd.DataFrame)->str:
 def OBV_indicator(ticker:str, data:pd.DataFrame)->str:  
    """On Balance Volume (OBV) indicator."""  
       
-   obv = ta.OBV(data['Close'], data['Volume'])  
+   obv = ta.OBV(data['close'], data['volume'])  
    if obv.iloc[-1] > 0:  
       return 'Buy'  
    elif obv.iloc[-1] < 0:  
@@ -643,7 +647,7 @@ def OBV_indicator(ticker:str, data:pd.DataFrame)->str:
 def HT_DCPERIOD_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hilbert Transform - Dominant Cycle Period (HT_DCPERIOD) indicator."""  
       
-   ht_dcperiod = ta.HT_DCPERIOD(data['Close'])  
+   ht_dcperiod = ta.HT_DCPERIOD(data['close'])  
    if ht_dcperiod.iloc[-1] > 20:  
       return 'Buy'  
    elif ht_dcperiod.iloc[-1] < 10:  
@@ -654,7 +658,7 @@ def HT_DCPERIOD_indicator(ticker:str, data:pd.DataFrame)->str:
 def HT_DCPHASE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hilbert Transform - Dominant Cycle Phase (HT_DCPHASE) indicator."""  
       
-   ht_dcphase = ta.HT_DCPHASE(data['Close'])  
+   ht_dcphase = ta.HT_DCPHASE(data['close'])  
    if ht_dcphase.iloc[-1] > 0:  
       return 'Buy'  
    elif ht_dcphase.iloc[-1] < 0:  
@@ -665,7 +669,7 @@ def HT_DCPHASE_indicator(ticker:str, data:pd.DataFrame)->str:
 def HT_PHASOR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hilbert Transform - Phasor Components (HT_PHASOR) indicator."""  
       
-   inphase, quadrature = ta.HT_PHASOR(data['Close'])  
+   inphase, quadrature = ta.HT_PHASOR(data['close'])  
    if inphase.iloc[-1] > 0:  
       return 'Buy'  
    elif inphase.iloc[-1] < 0:  
@@ -676,7 +680,7 @@ def HT_PHASOR_indicator(ticker:str, data:pd.DataFrame)->str:
 def HT_SINE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hilbert Transform - SineWave (HT_SINE) indicator."""  
       
-   sine, leadsine = ta.HT_SINE(data['Close'])  
+   sine, leadsine = ta.HT_SINE(data['close'])  
    if sine.iloc[-1] > 0:  
       return 'Buy'  
    elif sine.iloc[-1] < 0:  
@@ -687,7 +691,7 @@ def HT_SINE_indicator(ticker:str, data:pd.DataFrame)->str:
 def HT_TRENDMODE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hilbert Transform - Trend vs Cycle Mode (HT_TRENDMODE) indicator."""  
       
-   ht_trendmode = ta.HT_TRENDMODE(data['Close'])  
+   ht_trendmode = ta.HT_TRENDMODE(data['close'])  
    if ht_trendmode.iloc[-1] > 0:  
       return 'Buy'  
    elif ht_trendmode.iloc[-1] < 0:  
@@ -700,10 +704,10 @@ def HT_TRENDMODE_indicator(ticker:str, data:pd.DataFrame)->str:
 def AVGPRICE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Average Price (AVGPRICE) indicator."""  
       
-   avgprice = ta.AVGPRICE(data['Open'], data['High'], data['Low'], data['Close'])  
-   if data['Close'].iloc[-1] > avgprice.iloc[-1]:  
+   avgprice = ta.AVGPRICE(data['open'], data['high'], data['low'], data['close'])  
+   if data['close'].iloc[-1] > avgprice.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < avgprice.iloc[-1]:  
+   elif data['close'].iloc[-1] < avgprice.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -711,10 +715,10 @@ def AVGPRICE_indicator(ticker:str, data:pd.DataFrame)->str:
 def MEDPRICE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Median Price (MEDPRICE) indicator."""  
       
-   medprice = ta.MEDPRICE(data['High'], data['Low'])  
-   if data['Close'].iloc[-1] > medprice.iloc[-1]:  
+   medprice = ta.MEDPRICE(data['high'], data['low'])  
+   if data['close'].iloc[-1] > medprice.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < medprice.iloc[-1]:  
+   elif data['close'].iloc[-1] < medprice.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -722,21 +726,21 @@ def MEDPRICE_indicator(ticker:str, data:pd.DataFrame)->str:
 def TYPPRICE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Typical Price (TYPPRICE) indicator."""  
       
-   typprice = ta.TYPPRICE(data['High'], data['Low'], data['Close'])  
-   if data['Close'].iloc[-1] > typprice.iloc[-1]:  
+   typprice = ta.TYPPRICE(data['high'], data['low'], data['close'])  
+   if data['close'].iloc[-1] > typprice.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < typprice.iloc[-1]:  
+   elif data['close'].iloc[-1] < typprice.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
   
 def WCLPRICE_indicator(ticker:str, data:pd.DataFrame)->str:  
-   """Weighted Close Price (WCLPRICE) indicator."""  
+   """Weighted close Price (WCLPRICE) indicator."""  
       
-   wclprice = ta.WCLPRICE(data['High'], data['Low'], data['Close'])  
-   if data['Close'].iloc[-1] > wclprice.iloc[-1]:  
+   wclprice = ta.WCLPRICE(data['high'], data['low'], data['close'])  
+   if data['close'].iloc[-1] > wclprice.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < wclprice.iloc[-1]:  
+   elif data['close'].iloc[-1] < wclprice.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -746,7 +750,7 @@ def WCLPRICE_indicator(ticker:str, data:pd.DataFrame)->str:
 def ATR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Average True Range (ATR) indicator."""  
       
-   atr = ta.ATR(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   atr = ta.ATR(data['high'], data['low'], data['close'], timeperiod=14)  
    if atr.iloc[-1] > 20:  
       return 'Buy'  
    elif atr.iloc[-1] < 10:  
@@ -757,7 +761,7 @@ def ATR_indicator(ticker:str, data:pd.DataFrame)->str:
 def NATR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Normalized Average True Range (NATR) indicator."""  
       
-   natr = ta.NATR(data['High'], data['Low'], data['Close'], timeperiod=14)  
+   natr = ta.NATR(data['high'], data['low'], data['close'], timeperiod=14)  
    if natr.iloc[-1] > 20:  
       return 'Buy'  
    elif natr.iloc[-1] < 10:  
@@ -768,7 +772,7 @@ def NATR_indicator(ticker:str, data:pd.DataFrame)->str:
 def TRANGE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """True Range (TRANGE) indicator."""  
       
-   trange = ta.TRANGE(data['High'], data['Low'], data['Close'])  
+   trange = ta.TRANGE(data['high'], data['low'], data['close'])  
    if trange.iloc[-1] > 20:  
       return 'Buy'  
    elif trange.iloc[-1] < 10:  
@@ -781,7 +785,7 @@ def TRANGE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDL2CROWS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Two Crows (CDL2CROWS) indicator."""  
       
-   cdl2crows = ta.CDL2CROWS(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdl2crows = ta.CDL2CROWS(data['open'], data['high'], data['low'], data['close'])  
    if cdl2crows.iloc[-1] > 0:  
       return 'Buy'  
    elif cdl2crows.iloc[-1] < 0:  
@@ -792,7 +796,7 @@ def CDL2CROWS_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDL3BLACKCROWS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Three Black Crows (CDL3BLACKCROWS) indicator."""  
       
-   cdl3blackcrows = ta.CDL3BLACKCROWS(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdl3blackcrows = ta.CDL3BLACKCROWS(data['open'], data['high'], data['low'], data['close'])  
    if cdl3blackcrows.iloc[-1] > 0:  
       return 'Buy'  
    elif cdl3blackcrows.iloc[-1] < 0:  
@@ -803,7 +807,7 @@ def CDL3BLACKCROWS_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDL3INSIDE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Three Inside Up/Down (CDL3INSIDE) indicator."""  
       
-   cdl3inside = ta.CDL3INSIDE(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdl3inside = ta.CDL3INSIDE(data['open'], data['high'], data['low'], data['close'])  
    if cdl3inside.iloc[-1] > 0:  
       return 'Buy'  
    elif cdl3inside.iloc[-1] < 0:  
@@ -814,7 +818,7 @@ def CDL3INSIDE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDL3LINESTRIKE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Three-Line Strike (CDL3LINESTRIKE) indicator."""  
       
-   cdl3linestrike = ta.CDL3LINESTRIKE(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdl3linestrike = ta.CDL3LINESTRIKE(data['open'], data['high'], data['low'], data['close'])  
    if cdl3linestrike.iloc[-1] > 0:  
       return 'Buy'  
    elif cdl3linestrike.iloc[-1] < 0:  
@@ -825,7 +829,7 @@ def CDL3LINESTRIKE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDL3OUTSIDE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Three Outside Up/Down (CDL3OUTSIDE) indicator."""  
       
-   cdl3outside = ta.CDL3OUTSIDE(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdl3outside = ta.CDL3OUTSIDE(data['open'], data['high'], data['low'], data['close'])  
    if cdl3outside.iloc[-1] > 0:  
       return 'Buy'  
    elif cdl3outside.iloc[-1] < 0:  
@@ -836,7 +840,7 @@ def CDL3OUTSIDE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDL3STARSINSOUTH_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Three Stars In The South (CDL3STARSINSOUTH) indicator."""  
       
-   cdl3starsinsouth = ta.CDL3STARSINSOUTH(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdl3starsinsouth = ta.CDL3STARSINSOUTH(data['open'], data['high'], data['low'], data['close'])  
    if cdl3starsinsouth.iloc[-1] > 0:  
       return 'Buy'  
    elif cdl3starsinsouth.iloc[-1] < 0:  
@@ -847,7 +851,7 @@ def CDL3STARSINSOUTH_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDL3WHITESOLDIERS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Three Advancing White Soldiers (CDL3WHITESOLDIERS) indicator."""  
       
-   cdl3whitesoldiers = ta.CDL3WHITESOLDIERS(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdl3whitesoldiers = ta.CDL3WHITESOLDIERS(data['open'], data['high'], data['low'], data['close'])  
    if cdl3whitesoldiers.iloc[-1] > 0:  
       return 'Buy'  
    elif cdl3whitesoldiers.iloc[-1] < 0:  
@@ -858,7 +862,7 @@ def CDL3WHITESOLDIERS_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLABANDONEDBABY_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Abandoned Baby (CDLABANDONEDBABY) indicator."""  
       
-   cdlabandonedbaby = ta.CDLABANDONEDBABY(data['Open'], data['High'], data['Low'], data['Close'], penetration=0)  
+   cdlabandonedbaby = ta.CDLABANDONEDBABY(data['open'], data['high'], data['low'], data['close'], penetration=0)  
    if cdlabandonedbaby.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlabandonedbaby.iloc[-1] < 0:  
@@ -869,7 +873,7 @@ def CDLABANDONEDBABY_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLADVANCEBLOCK_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Advance Block (CDLADVANCEBLOCK) indicator."""  
       
-   cdladvanceblock = ta.CDLADVANCEBLOCK(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdladvanceblock = ta.CDLADVANCEBLOCK(data['open'], data['high'], data['low'], data['close'])  
    if cdladvanceblock.iloc[-1] > 0:  
       return 'Buy'  
    elif cdladvanceblock.iloc[-1] < 0:  
@@ -880,7 +884,7 @@ def CDLADVANCEBLOCK_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLBELTHOLD_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Belt-hold (CDLBELTHOLD) indicator."""  
       
-   cdlbelthold = ta.CDLBELTHOLD(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlbelthold = ta.CDLBELTHOLD(data['open'], data['high'], data['low'], data['close'])  
    if cdlbelthold.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlbelthold.iloc[-1] < 0:  
@@ -891,7 +895,7 @@ def CDLBELTHOLD_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLBREAKAWAY_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Breakaway (CDLBREAKAWAY) indicator."""  
       
-   cdlbreakaway = ta.CDLBREAKAWAY(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlbreakaway = ta.CDLBREAKAWAY(data['open'], data['high'], data['low'], data['close'])  
    if cdlbreakaway.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlbreakaway.iloc[-1] < 0:  
@@ -902,7 +906,7 @@ def CDLBREAKAWAY_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLCLOSINGMARUBOZU_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Closing Marubozu (CDLCLOSINGMARUBOZU) indicator."""  
       
-   cdlclosingmarubozu = ta.CDLCLOSINGMARUBOZU(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlclosingmarubozu = ta.CDLCLOSINGMARUBOZU(data['open'], data['high'], data['low'], data['close'])  
    if cdlclosingmarubozu.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlclosingmarubozu.iloc[-1] < 0:  
@@ -913,7 +917,7 @@ def CDLCLOSINGMARUBOZU_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLCONCEALBABYSWALL_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Concealing Baby Swallow (CDLCONCEALBABYSWALL) indicator."""  
       
-   cdlconcealbabyswall = ta.CDLCONCEALBABYSWALL(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlconcealbabyswall = ta.CDLCONCEALBABYSWALL(data['open'], data['high'], data['low'], data['close'])  
    if cdlconcealbabyswall.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlconcealbabyswall.iloc[-1] < 0:  
@@ -924,7 +928,7 @@ def CDLCONCEALBABYSWALL_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLCOUNTERATTACK_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Counterattack (CDLCOUNTERATTACK) indicator."""  
       
-   cdlcounterattack = ta.CDLCOUNTERATTACK(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlcounterattack = ta.CDLCOUNTERATTACK(data['open'], data['high'], data['low'], data['close'])  
    if cdlcounterattack.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlcounterattack.iloc[-1] < 0:  
@@ -935,7 +939,7 @@ def CDLCOUNTERATTACK_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLDARKCLOUDCOVER_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Dark Cloud Cover (CDLDARKCLOUDCOVER) indicator."""  
       
-   cdldarkcloudcover = ta.CDLDARKCLOUDCOVER(data['Open'], data['High'], data['Low'], data['Close'], penetration=0)  
+   cdldarkcloudcover = ta.CDLDARKCLOUDCOVER(data['open'], data['high'], data['low'], data['close'], penetration=0)  
    if cdldarkcloudcover.iloc[-1] > 0:  
       return 'Buy'  
    elif cdldarkcloudcover.iloc[-1] < 0:  
@@ -946,7 +950,7 @@ def CDLDARKCLOUDCOVER_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLDOJI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Doji (CDLDOJI) indicator."""  
       
-   cdldoji = ta.CDLDOJI(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdldoji = ta.CDLDOJI(data['open'], data['high'], data['low'], data['close'])  
    if cdldoji.iloc[-1] > 0:  
       return 'Buy'  
    elif cdldoji.iloc[-1] < 0:  
@@ -957,7 +961,7 @@ def CDLDOJI_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLDOJISTAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Doji Star (CDLDOJISTAR) indicator."""  
       
-   cdldojistar = ta.CDLDOJISTAR(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdldojistar = ta.CDLDOJISTAR(data['open'], data['high'], data['low'], data['close'])  
    if cdldojistar.iloc[-1] > 0:  
       return 'Buy'  
    elif cdldojistar.iloc[-1] < 0:  
@@ -968,7 +972,7 @@ def CDLDOJISTAR_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLDRAGONFLYDOJI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Dragonfly Doji (CDLDRAGONFLYDOJI) indicator."""  
       
-   cdldragonflydoji = ta.CDLDRAGONFLYDOJI(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdldragonflydoji = ta.CDLDRAGONFLYDOJI(data['open'], data['high'], data['low'], data['close'])  
    if cdldragonflydoji.iloc[-1] > 0:  
       return 'Buy'  
    elif cdldragonflydoji.iloc[-1] < 0:  
@@ -979,7 +983,7 @@ def CDLDRAGONFLYDOJI_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLENGULFING_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Engulfing Pattern (CDLENGULFING) indicator."""  
       
-   cdlengulfing = ta.CDLENGULFING(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlengulfing = ta.CDLENGULFING(data['open'], data['high'], data['low'], data['close'])  
    if cdlengulfing.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlengulfing.iloc[-1] < 0:  
@@ -990,7 +994,7 @@ def CDLENGULFING_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLEVENINGDOJISTAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Evening Doji Star (CDLEVENINGDOJISTAR) indicator."""  
       
-   cdlEveningDojiStar = ta.CDLEVENINGDOJISTAR(data['Open'], data['High'], data['Low'], data['Close'], penetration=0)  
+   cdlEveningDojiStar = ta.CDLEVENINGDOJISTAR(data['open'], data['high'], data['low'], data['close'], penetration=0)  
    if cdlEveningDojiStar.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlEveningDojiStar.iloc[-1] < 0:  
@@ -1001,7 +1005,7 @@ def CDLEVENINGDOJISTAR_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLEVENINGSTAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Evening Star (CDLEVENINGSTAR) indicator."""  
       
-   cdlEveningStar = ta.CDLEVENINGSTAR(data['Open'], data['High'], data['Low'], data['Close'], penetration=0)  
+   cdlEveningStar = ta.CDLEVENINGSTAR(data['open'], data['high'], data['low'], data['close'], penetration=0)  
    if cdlEveningStar.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlEveningStar.iloc[-1] < 0:  
@@ -1012,7 +1016,7 @@ def CDLEVENINGSTAR_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLGAPSIDESIDEWHITE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Up/Down-gap side-by-side white lines (CDLGAPSIDESIDEWHITE) indicator."""  
       
-   cdlgapsidesidewhite = ta.CDLGAPSIDESIDEWHITE(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlgapsidesidewhite = ta.CDLGAPSIDESIDEWHITE(data['open'], data['high'], data['low'], data['close'])  
    if cdlgapsidesidewhite.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlgapsidesidewhite.iloc[-1] < 0:  
@@ -1023,7 +1027,7 @@ def CDLGAPSIDESIDEWHITE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLGRAVESTONEDOJI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Gravestone Doji (CDLGRAVESTONEDOJI) indicator."""  
       
-   cdlgravestonedoji = ta.CDLGRAVESTONEDOJI(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlgravestonedoji = ta.CDLGRAVESTONEDOJI(data['open'], data['high'], data['low'], data['close'])  
    if cdlgravestonedoji.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlgravestonedoji.iloc[-1] < 0:  
@@ -1034,7 +1038,7 @@ def CDLGRAVESTONEDOJI_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLHAMMER_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hammer (CDLHAMMER) indicator."""  
       
-   cdlhammer = ta.CDLHAMMER(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlhammer = ta.CDLHAMMER(data['open'], data['high'], data['low'], data['close'])  
    if cdlhammer.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlhammer.iloc[-1] < 0:  
@@ -1045,7 +1049,7 @@ def CDLHAMMER_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLHANGINGMAN_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hanging Man (CDLHANGINGMAN) indicator."""  
       
-   cdlhangingman = ta.CDLHANGINGMAN(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlhangingman = ta.CDLHANGINGMAN(data['open'], data['high'], data['low'], data['close'])  
    if cdlhangingman.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlhangingman.iloc[-1] < 0:  
@@ -1056,7 +1060,7 @@ def CDLHANGINGMAN_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLHARAMI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Harami Pattern (CDLHARAMI) indicator."""  
       
-   cdlharami = ta.CDLHARAMI(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlharami = ta.CDLHARAMI(data['open'], data['high'], data['low'], data['close'])  
    if cdlharami.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlharami.iloc[-1] < 0:  
@@ -1067,7 +1071,7 @@ def CDLHARAMI_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLHARAMICROSS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Harami Cross Pattern (CDLHARAMICROSS) indicator."""  
       
-   cdlharamicross = ta.CDLHARAMICROSS(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlharamicross = ta.CDLHARAMICROSS(data['open'], data['high'], data['low'], data['close'])  
    if cdlharamicross.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlharamicross.iloc[-1] < 0:  
@@ -1078,7 +1082,7 @@ def CDLHARAMICROSS_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLHIGHWAVE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """High-Wave Candle (CDLHIGHWAVE) indicator."""  
       
-   cdlhighwave = ta.CDLHIGHWAVE(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlhighwave = ta.CDLHIGHWAVE(data['open'], data['high'], data['low'], data['close'])  
    if cdlhighwave.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlhighwave.iloc[-1] < 0:  
@@ -1089,7 +1093,7 @@ def CDLHIGHWAVE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLHIKKAKE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Hikkake Pattern (CDLHIKKAKE) indicator."""  
       
-   cdlhikkake = ta.CDLHIKKAKE(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlhikkake = ta.CDLHIKKAKE(data['open'], data['high'], data['low'], data['close'])  
    if cdlhikkake.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlhikkake.iloc[-1] < 0:  
@@ -1100,7 +1104,7 @@ def CDLHIKKAKE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLHIKKAKEMOD_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Modified Hikkake Pattern (CDLHIKKAKEMOD) indicator."""  
       
-   cdlhikkakemod = ta.CDLHIKKAKEMOD(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlhikkakemod = ta.CDLHIKKAKEMOD(data['open'], data['high'], data['low'], data['close'])  
    if cdlhikkakemod.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlhikkakemod.iloc[-1] < 0:  
@@ -1111,7 +1115,7 @@ def CDLHIKKAKEMOD_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLHOMINGPIGEON_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Homing Pigeon (CDLHOMINGPIGEON) indicator."""  
       
-   cdlhomingpigeon = ta.CDLHOMINGPIGEON(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlhomingpigeon = ta.CDLHOMINGPIGEON(data['open'], data['high'], data['low'], data['close'])  
    if cdlhomingpigeon.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlhomingpigeon.iloc[-1] < 0:  
@@ -1122,7 +1126,7 @@ def CDLHOMINGPIGEON_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLIDENTICAL3CROWS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Identical Three Crows (CDLIDENTICAL3CROWS) indicator."""  
       
-   cdlidentical3crows = ta.CDLIDENTICAL3CROWS(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlidentical3crows = ta.CDLIDENTICAL3CROWS(data['open'], data['high'], data['low'], data['close'])  
    if cdlidentical3crows.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlidentical3crows.iloc[-1] < 0:  
@@ -1133,7 +1137,7 @@ def CDLIDENTICAL3CROWS_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLINNECK_indicator(ticker:str, data:pd.DataFrame)->str:  
    """In-Neck Pattern (CDLINNECK) indicator."""  
       
-   cdlInNeck = ta.CDLINNECK(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlInNeck = ta.CDLINNECK(data['open'], data['high'], data['low'], data['close'])  
    if cdlInNeck.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlInNeck.iloc[-1] < 0:  
@@ -1144,7 +1148,7 @@ def CDLINNECK_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLINVERTEDHAMMER_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Inverted Hammer (CDLINVERTEDHAMMER) indicator."""  
       
-   cdlInvertedHammer = ta.CDLINVERTEDHAMMER(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlInvertedHammer = ta.CDLINVERTEDHAMMER(data['open'], data['high'], data['low'], data['close'])  
    if cdlInvertedHammer.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlInvertedHammer.iloc[-1] < 0:  
@@ -1155,7 +1159,7 @@ def CDLINVERTEDHAMMER_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLKICKING_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Kicking (CDLKICKING) indicator."""  
       
-   cdlkicking = ta.CDLKICKING(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlkicking = ta.CDLKICKING(data['open'], data['high'], data['low'], data['close'])  
    if cdlkicking.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlkicking.iloc[-1] < 0:  
@@ -1167,7 +1171,7 @@ def CDLKICKING_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLKICKINGBYLENGTH_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Kicking - bull/bear determined by the longer marubozu (CDLKICKINGBYLENGTH) indicator."""  
       
-   cdlkickingbylength = ta.CDLKICKINGBYLENGTH(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlkickingbylength = ta.CDLKICKINGBYLENGTH(data['open'], data['high'], data['low'], data['close'])  
    if cdlkickingbylength.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlkickingbylength.iloc[-1] < 0:  
@@ -1178,7 +1182,7 @@ def CDLKICKINGBYLENGTH_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLLADDERBOTTOM_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Ladder Bottom (CDLLADDERBOTTOM) indicator."""  
       
-   cdlladderbottom = ta.CDLLADDERBOTTOM(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlladderbottom = ta.CDLLADDERBOTTOM(data['open'], data['high'], data['low'], data['close'])  
    if cdlladderbottom.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlladderbottom.iloc[-1] < 0:  
@@ -1189,7 +1193,7 @@ def CDLLADDERBOTTOM_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLLONGLEGGEDDOJI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Long Legged Doji (CDLLONGLEGGEDDOJI) indicator."""  
       
-   cdllongleggeddoji = ta.CDLLONGLEGGEDDOJI(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdllongleggeddoji = ta.CDLLONGLEGGEDDOJI(data['open'], data['high'], data['low'], data['close'])  
    if cdllongleggeddoji.iloc[-1] > 0:  
       return 'Buy'  
    elif cdllongleggeddoji.iloc[-1] < 0:  
@@ -1200,7 +1204,7 @@ def CDLLONGLEGGEDDOJI_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLLONGLINE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Long Line Candle (CDLLONGLINE) indicator."""  
       
-   cdllongline = ta.CDLLONGLINE(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdllongline = ta.CDLLONGLINE(data['open'], data['high'], data['low'], data['close'])  
    if cdllongline.iloc[-1] > 0:  
       return 'Buy'  
    elif cdllongline.iloc[-1] < 0:  
@@ -1211,7 +1215,7 @@ def CDLLONGLINE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLMARUBOZU_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Marubozu (CDLMARUBOZU) indicator."""  
       
-   cdlmarubozu = ta.CDLMARUBOZU(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlmarubozu = ta.CDLMARUBOZU(data['open'], data['high'], data['low'], data['close'])  
    if cdlmarubozu.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlmarubozu.iloc[-1] < 0:  
@@ -1222,7 +1226,7 @@ def CDLMARUBOZU_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLMATCHINGLOW_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Matching Low (CDLMATCHINGLOW) indicator."""  
       
-   cdlmatchinglow = ta.CDLMATCHINGLOW(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlmatchinglow = ta.CDLMATCHINGLOW(data['open'], data['high'], data['low'], data['close'])  
    if cdlmatchinglow.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlmatchinglow.iloc[-1] < 0:  
@@ -1233,7 +1237,7 @@ def CDLMATCHINGLOW_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLMATHOLD_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Mat Hold (CDLMATHOLD) indicator."""  
       
-   cdlmathold = ta.CDLMATHOLD(data['Open'], data['High'], data['Low'], data['Close'], penetration=0)  
+   cdlmathold = ta.CDLMATHOLD(data['open'], data['high'], data['low'], data['close'], penetration=0)  
    if cdlmathold.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlmathold.iloc[-1] < 0:  
@@ -1244,7 +1248,7 @@ def CDLMATHOLD_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLMORNINGDOJISTAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Morning Doji Star (CDLMORNINGDOJISTAR) indicator."""  
       
-   cdlmorningdojistar = ta.CDLMORNINGDOJISTAR(data['Open'], data['High'], data['Low'], data['Close'], penetration=0)  
+   cdlmorningdojistar = ta.CDLMORNINGDOJISTAR(data['open'], data['high'], data['low'], data['close'], penetration=0)  
    if cdlmorningdojistar.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlmorningdojistar.iloc[-1] < 0:  
@@ -1255,7 +1259,7 @@ def CDLMORNINGDOJISTAR_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLMORNINGSTAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Morning Star (CDLMORNINGSTAR) indicator."""  
       
-   cdlmorningstar = ta.CDLMORNINGSTAR(data['Open'], data['High'], data['Low'], data['Close'], penetration=0)  
+   cdlmorningstar = ta.CDLMORNINGSTAR(data['open'], data['high'], data['low'], data['close'], penetration=0)  
    if cdlmorningstar.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlmorningstar.iloc[-1] < 0:  
@@ -1266,7 +1270,7 @@ def CDLMORNINGSTAR_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLONNECK_indicator(ticker:str, data:pd.DataFrame)->str:  
    """On-Neck Pattern (CDLONNECK) indicator."""  
       
-   cdlonneck = ta.CDLONNECK(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlonneck = ta.CDLONNECK(data['open'], data['high'], data['low'], data['close'])  
    if cdlonneck.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlonneck.iloc[-1] < 0:  
@@ -1277,7 +1281,7 @@ def CDLONNECK_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLPIERCING_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Piercing Pattern (CDLPIERCING) indicator."""  
       
-   cdlpiercing = ta.CDLPIERCING(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlpiercing = ta.CDLPIERCING(data['open'], data['high'], data['low'], data['close'])  
    if cdlpiercing.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlpiercing.iloc[-1] < 0:  
@@ -1288,7 +1292,7 @@ def CDLPIERCING_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLRICKSHAWMAN_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Rickshaw Man (CDLRICKSHAWMAN) indicator."""  
       
-   cdlrickshawman = ta.CDLRICKSHAWMAN(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlrickshawman = ta.CDLRICKSHAWMAN(data['open'], data['high'], data['low'], data['close'])  
    if cdlrickshawman.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlrickshawman.iloc[-1] < 0:  
@@ -1299,7 +1303,7 @@ def CDLRICKSHAWMAN_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLRISEFALL3METHODS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Rising/Falling Three Methods (CDLRISEFALL3METHODS) indicator."""  
       
-   cdlrisefall3methods = ta.CDLRISEFALL3METHODS(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlrisefall3methods = ta.CDLRISEFALL3METHODS(data['open'], data['high'], data['low'], data['close'])  
    if cdlrisefall3methods.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlrisefall3methods.iloc[-1] < 0:  
@@ -1310,7 +1314,7 @@ def CDLRISEFALL3METHODS_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLSEPARATINGLINES_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Separating Lines (CDLSEPARATINGLINES) indicator."""  
       
-   cdlseparatinglines = ta.CDLSEPARATINGLINES(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlseparatinglines = ta.CDLSEPARATINGLINES(data['open'], data['high'], data['low'], data['close'])  
    if cdlseparatinglines.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlseparatinglines.iloc[-1] < 0:  
@@ -1321,7 +1325,7 @@ def CDLSEPARATINGLINES_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLSHOOTINGSTAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Shooting Star (CDLSHOOTINGSTAR) indicator."""  
       
-   cdlshootingstar = ta.CDLSHOOTINGSTAR(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlshootingstar = ta.CDLSHOOTINGSTAR(data['open'], data['high'], data['low'], data['close'])  
    if cdlshootingstar.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlshootingstar.iloc[-1] < 0:  
@@ -1332,7 +1336,7 @@ def CDLSHOOTINGSTAR_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLSHORTLINE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Short Line Candle (CDLSHORTLINE) indicator."""  
       
-   cdlshortline = ta.CDLSHORTLINE(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlshortline = ta.CDLSHORTLINE(data['open'], data['high'], data['low'], data['close'])  
    if cdlshortline.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlshortline.iloc[-1] < 0:  
@@ -1343,7 +1347,7 @@ def CDLSHORTLINE_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLSPINNINGTOP_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Spinning Top (CDLSPINNINGTOP) indicator."""  
       
-   cdlspinningtop = ta.CDLSPINNINGTOP(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlspinningtop = ta.CDLSPINNINGTOP(data['open'], data['high'], data['low'], data['close'])  
    if cdlspinningtop.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlspinningtop.iloc[-1] < 0:  
@@ -1354,7 +1358,7 @@ def CDLSPINNINGTOP_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLSTALLEDPATTERN_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Stalled Pattern (CDLSTALLEDPATTERN) indicator."""  
       
-   cdlstalledpattern = ta.CDLSTALLEDPATTERN(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlstalledpattern = ta.CDLSTALLEDPATTERN(data['open'], data['high'], data['low'], data['close'])  
    if cdlstalledpattern.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlstalledpattern.iloc[-1] < 0:  
@@ -1365,7 +1369,7 @@ def CDLSTALLEDPATTERN_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLSTICKSANDWICH_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Stick Sandwich (CDLSTICKSANDWICH) indicator."""  
       
-   cdlsticksandwich = ta.CDLSTICKSANDWICH(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlsticksandwich = ta.CDLSTICKSANDWICH(data['open'], data['high'], data['low'], data['close'])  
    if cdlsticksandwich.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlsticksandwich.iloc[-1] < 0:  
@@ -1376,7 +1380,7 @@ def CDLSTICKSANDWICH_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLTAKURI_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Takuri (Dragonfly Doji with very long lower shadow) (CDLTAKURI) indicator."""  
       
-   cdltakuri = ta.CDLTAKURI(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdltakuri = ta.CDLTAKURI(data['open'], data['high'], data['low'], data['close'])  
    if cdltakuri.iloc[-1] > 0:  
       return 'Buy'  
    elif cdltakuri.iloc[-1] < 0:  
@@ -1387,7 +1391,7 @@ def CDLTAKURI_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLTASUKIGAP_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Tasuki Gap (CDLTASUKIGAP) indicator."""  
       
-   cdltasukigap = ta.CDLTASUKIGAP(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdltasukigap = ta.CDLTASUKIGAP(data['open'], data['high'], data['low'], data['close'])  
    if cdltasukigap.iloc[-1] > 0:  
       return 'Buy'  
    elif cdltasukigap.iloc[-1] < 0:  
@@ -1398,7 +1402,7 @@ def CDLTASUKIGAP_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLTHRUSTING_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Thrusting Pattern (CDLTHRUSTING) indicator."""  
       
-   cdlthrusting = ta.CDLTHRUSTING(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlthrusting = ta.CDLTHRUSTING(data['open'], data['high'], data['low'], data['close'])  
    if cdlthrusting.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlthrusting.iloc[-1] < 0:  
@@ -1409,7 +1413,7 @@ def CDLTHRUSTING_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLTRISTAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Tristar Pattern (CDLTRISTAR) indicator."""  
       
-   cdltristar = ta.CDLTRISTAR(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdltristar = ta.CDLTRISTAR(data['open'], data['high'], data['low'], data['close'])  
    if cdltristar.iloc[-1] > 0:  
       return 'Buy'  
    elif cdltristar.iloc[-1] < 0:  
@@ -1420,7 +1424,7 @@ def CDLTRISTAR_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLUNIQUE3RIVER_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Unique 3 River (CDLUNIQUE3RIVER) indicator."""  
       
-   cdlunique3river = ta.CDLUNIQUE3RIVER(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlunique3river = ta.CDLUNIQUE3RIVER(data['open'], data['high'], data['low'], data['close'])  
    if cdlunique3river.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlunique3river.iloc[-1] < 0:  
@@ -1431,7 +1435,7 @@ def CDLUNIQUE3RIVER_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLUPSIDEGAP2CROWS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Upside Gap Two Crows (CDLUPSIDEGAP2CROWS) indicator."""  
       
-   cdlupsidegap2crows = ta.CDLUPSIDEGAP2CROWS(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlupsidegap2crows = ta.CDLUPSIDEGAP2CROWS(data['open'], data['high'], data['low'], data['close'])  
    if cdlupsidegap2crows.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlupsidegap2crows.iloc[-1] < 0:  
@@ -1442,7 +1446,7 @@ def CDLUPSIDEGAP2CROWS_indicator(ticker:str, data:pd.DataFrame)->str:
 def CDLXSIDEGAP3METHODS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Upside/Downside Gap Three Methods (CDLXSIDEGAP3METHODS) indicator."""  
       
-   cdlxsidegap3methods = ta.CDLXSIDEGAP3METHODS(data['Open'], data['High'], data['Low'], data['Close'])  
+   cdlxsidegap3methods = ta.CDLXSIDEGAP3METHODS(data['open'], data['high'], data['low'], data['close'])  
    if cdlxsidegap3methods.iloc[-1] > 0:  
       return 'Buy'  
    elif cdlxsidegap3methods.iloc[-1] < 0:  
@@ -1455,7 +1459,7 @@ def CDLXSIDEGAP3METHODS_indicator(ticker:str, data:pd.DataFrame)->str:
 def BETA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Beta (BETA) indicator."""  
       
-   beta = ta.BETA(data['High'], data['Low'], timeperiod=5)  
+   beta = ta.BETA(data['high'], data['low'], timeperiod=5)  
    if beta.iloc[-1] > 1:  
       return 'Buy'  
    elif beta.iloc[-1] < 1:  
@@ -1466,7 +1470,7 @@ def BETA_indicator(ticker:str, data:pd.DataFrame)->str:
 def CORREL_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Pearson's Correlation Coefficient (r) (CORREL) indicator."""  
       
-   correl = ta.CORREL(data['High'], data['Low'], timeperiod=30)  
+   correl = ta.CORREL(data['high'], data['low'], timeperiod=30)  
    if correl.iloc[-1] > 0.5:  
       return 'Buy'  
    elif correl.iloc[-1] < -0.5:  
@@ -1477,10 +1481,10 @@ def CORREL_indicator(ticker:str, data:pd.DataFrame)->str:
 def LINEARREG_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Linear Regression (LINEARREG) indicator."""  
       
-   linearreg = ta.LINEARREG(data['Close'], timeperiod=14)  
-   if data['Close'].iloc[-1] > linearreg.iloc[-1]:  
+   linearreg = ta.LINEARREG(data['close'], timeperiod=14)  
+   if data['close'].iloc[-1] > linearreg.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < linearreg.iloc[-1]:  
+   elif data['close'].iloc[-1] < linearreg.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -1488,7 +1492,7 @@ def LINEARREG_indicator(ticker:str, data:pd.DataFrame)->str:
 def LINEARREG_ANGLE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Linear Regression Angle (LINEARREG_ANGLE) indicator."""  
       
-   linearreg_angle = ta.LINEARREG_ANGLE(data['Close'], timeperiod=14)  
+   linearreg_angle = ta.LINEARREG_ANGLE(data['close'], timeperiod=14)  
    if linearreg_angle.iloc[-1] > 0:  
       return 'Buy'  
    elif linearreg_angle.iloc[-1] < 0:  
@@ -1499,10 +1503,10 @@ def LINEARREG_ANGLE_indicator(ticker:str, data:pd.DataFrame)->str:
 def LINEARREG_INTERCEPT_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Linear Regression Intercept (LINEARREG_INTERCEPT) indicator."""  
       
-   linearreg_intercept = ta.LINEARREG_INTERCEPT(data['Close'], timeperiod=14)  
-   if data['Close'].iloc[-1] > linearreg_intercept.iloc[-1]:  
+   linearreg_intercept = ta.LINEARREG_INTERCEPT(data['close'], timeperiod=14)  
+   if data['close'].iloc[-1] > linearreg_intercept.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < linearreg_intercept.iloc[-1]:  
+   elif data['close'].iloc[-1] < linearreg_intercept.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -1510,7 +1514,7 @@ def LINEARREG_INTERCEPT_indicator(ticker:str, data:pd.DataFrame)->str:
 def LINEARREG_SLOPE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Linear Regression Slope (LINEARREG_SLOPE) indicator."""  
       
-   linearreg_slope = ta.LINEARREG_SLOPE(data['Close'], timeperiod=14)  
+   linearreg_slope = ta.LINEARREG_SLOPE(data['close'], timeperiod=14)  
    if linearreg_slope.iloc[-1] > 0:  
       return 'Buy'  
    elif linearreg_slope.iloc[-1] < 0:  
@@ -1521,7 +1525,7 @@ def LINEARREG_SLOPE_indicator(ticker:str, data:pd.DataFrame)->str:
 def STDDEV_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Standard Deviation (STDDEV) indicator."""  
       
-   stddev = ta.STDDEV(data['Close'], timeperiod=20, nbdev=1)  
+   stddev = ta.STDDEV(data['close'], timeperiod=20, nbdev=1)  
    if stddev.iloc[-1] > 20:  
       return 'Buy'  
    elif stddev.iloc[-1] < 10:  
@@ -1531,11 +1535,11 @@ def STDDEV_indicator(ticker:str, data:pd.DataFrame)->str:
   
 def TSF_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Time Series Forecast (TSF) indicator."""  
-      
-   tsf = ta.TSF(data['Close'], timeperiod=14)  
-   if data['Close'].iloc[-1] > tsf.iloc[-1]:  
+
+   tsf = ta.TSF(data['close'], timeperiod=14)  
+   if data['close'].iloc[-1] > tsf.iloc[-1]:  
       return 'Buy'  
-   elif data['Close'].iloc[-1] < tsf.iloc[-1]:  
+   elif data['close'].iloc[-1] < tsf.iloc[-1]:  
       return 'Sell'  
    else:  
       return 'Hold'  
@@ -1543,7 +1547,7 @@ def TSF_indicator(ticker:str, data:pd.DataFrame)->str:
 def VAR_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Variance (VAR) indicator."""  
       
-   var = ta.VAR(data['Close'], timeperiod=5, nbdev=1)  
+   var = ta.VAR(data['close'], timeperiod=5, nbdev=1)  
    if var.iloc[-1] > 20:  
       return 'Buy'  
    elif var.iloc[-1] < 10:  
