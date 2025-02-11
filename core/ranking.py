@@ -158,8 +158,7 @@ def simulate_trade(ticker:str, strategy:callable, historical_data:"pd.DataFrame"
                 {"$inc": {"neutral_trades": 1}}
                 )
                 
-            else:   
-                
+            else:
                 holdings_collection.update_one(
                 {"strategy": strategy.__name__},
                 {"$inc": {"failed_trades": 1}},
