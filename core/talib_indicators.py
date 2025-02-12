@@ -44,8 +44,8 @@ The functions return a string 'buy', 'sell', or 'hold'.
 # Overlap Studies
 def BBANDS_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Bollinger Bands (BBANDS) indicator."""  
-      
-   upper, middle, lower = ta.BBANDS(data['close'], timeperiod=20)  
+   
+   upper, middle, lower = ta.BBANDS(data['close'], timeperiod=20, matype=1)  
    # sells when the current price is above the upper band
    # and buys when the current price is below the lower band
    # otherwise, hold
@@ -53,8 +53,8 @@ def BBANDS_indicator(ticker:str, data:pd.DataFrame)->str:
       return 'sell'
    elif data['close'].iloc[-1] < lower.iloc[-1]:  
       return 'buy'  
-   else:  
-      return 'hold' 
+   else:
+      return 'hold'
 
 def DEMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Double Exponential Moving Average (DEMA) indicator."""  
@@ -65,7 +65,7 @@ def DEMA_indicator(ticker:str, data:pd.DataFrame)->str:
    elif data['close'].iloc[-1] < dema.iloc[-1]:  
       return 'sell'  
    else:  
-      return 'hold'  
+      return 'hold'
   
 def EMA_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Exponential Moving Average (EMA) indicator."""  
@@ -141,11 +141,11 @@ def MAMA_indicator(ticker:str, data:pd.DataFrame)->str:
 
     # Generate signal
     if current_price > current_mama:
-        return "Buy"
+        return "buy"
     elif current_price < current_mama:
         return "sell"
     else:
-        return "Hold"
+        return "hold"
   
 def MAVP_indicator(ticker:str, data:pd.DataFrame)->str:
     """
@@ -178,11 +178,11 @@ def MAVP_indicator(ticker:str, data:pd.DataFrame)->str:
 
     # Generate signal
     if current_price > current_mavp:
-        return "Buy"
+        return "buy"
     elif current_price < current_mavp:
         return "sell"
     else:
-        return "Hold"
+        return "hold"
 
   
 def MIDPOINT_indicator(ticker:str, data:pd.DataFrame)->str:  
@@ -497,7 +497,7 @@ def PPO_indicator(ticker:str, data:pd.DataFrame)->str:
    elif ppo.iloc[-1] < 0:  
       return 'sell'  
    else:  
-      return 'hold'  
+      return 'hold'
   
 def ROC_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Rate of change : ((price/prevPrice)-1)*100 (ROC) indicator."""  
@@ -1248,7 +1248,7 @@ def CDLMATCHINGLOW_indicator(ticker:str, data:pd.DataFrame)->str:
       return 'hold'  
   
 def CDLMATHOLD_indicator(ticker:str, data:pd.DataFrame)->str:  
-   """Mat Hold (CDLMATHOLD) indicator."""  
+   """Mat hold (CDLMATHOLD) indicator."""  
       
    cdlmathold = ta.CDLMATHOLD(data['open'], data['high'], data['low'], data['close'], penetration=0)  
    if cdlmathold.iloc[-1] > 0:  
