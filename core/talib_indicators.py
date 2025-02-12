@@ -8,13 +8,18 @@ sys.path.append('..')
 from control import trade_asset_limit
 
 
-def simulate_strategy(strategy, ticker, current_price, historical_data, account_cash, portfolio_qty, total_portfolio_value):
+def simulate_strategy(strategy:callable, ticker:str, current_price:float, historical_data:pd.DataFrame, account_cash:float, portfolio_qty:int, total_portfolio_value:float)->tuple[str, int]:
+   """
+   Simulate a trade for a ticker on a strategy.
+   """
    max_investment = total_portfolio_value * trade_asset_limit
    action = strategy(ticker, historical_data)
    
    if action == 'Buy':
-      return 'buy', min(int(max_investment // current_price), int(account_cash // current_price))
-   elif action == 'Sell' and portfolio_qty > 0:
+      return 'buy', min(
+                        int(max_investment // current_price - portfolio_qty), # to not exceed max investment in one stock
+                        int(account_cash // current_price)) # to not exceed amount of cash in the account
+   elif action == 'Sell' and portfolio_qty >= 1:
       return 'sell', min(portfolio_qty, max(1, int(portfolio_qty * 0.5))) # sell half of the portfolio
    else:
       return 'hold', 0

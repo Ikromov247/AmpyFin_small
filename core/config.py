@@ -1,3 +1,6 @@
+
+# ideal period for each indicator in days
+
 indicator_periods = {
     "BBANDS_indicator": 365,
     "DEMA_indicator": 30,

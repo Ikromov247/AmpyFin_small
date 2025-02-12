@@ -3,6 +3,8 @@ import json
 import time
 import datetime
 import heapq
+import logging
+import threading
 
 # third-party libraries
 import pandas as pd
@@ -19,10 +21,13 @@ def update_portfolio_values(strategy):
     # get tickers in the strategy's holdings
     # calculate the current value of the holdings
     # add the current value to the amount of cash held
-    # update the portfolio value 
+    # update the portfolio value
     pass
 
 def process_ticker(ticker, mongo_client):
+    """
+    Simulate a trade for a ticker on all strategies
+    """
     try:
         indicator_tb = mongo_client.IndicatorsDatabase
         indicator_collection = indicator_tb.Indicators
@@ -71,11 +76,22 @@ def process_ticker(ticker, mongo_client):
 def simulate_trade(ticker:str, strategy:callable, historical_data:pd.DataFrame, account_cash:float, portfolio_qty:int, total_portfolio_value:float, mongo_client):
       """
       Simulates a trade based on the given strategy and updates MongoDB.
+      Arguments:
+         ticker (str): The ticker to trade
+         strategy (callable): The strategy to use for the trade
+         historical_data (pd.DataFrame): The historical data for the ticker until now
+         account_cash (float): The amount of cash (not invested) in the account
+         portfolio_qty (int): The quantity of the ticker in the portfolio this strategy holds
+         total_portfolio_value (float): The total value of the portfolio (cash + stock * price)
+         mongo_client (MongoClient): The MongoDB client
       """
       current_price = round(historical_data['close'].iloc[-1], 2) 
 
       # Simulate trading action from strategy
       print(f"Simulating trade for {ticker} with strategy {strategy.__name__} and quantity of {portfolio_qty}")
+      
+      action = strategy(ticker, historical_data)
+      # calculate quantity
       action, quantity = simulate_strategy(strategy, ticker, current_price, historical_data, account_cash, portfolio_qty, total_portfolio_value)
       
       # MongoDB setup
@@ -91,7 +107,7 @@ def simulate_trade(ticker:str, strategy:callable, historical_data:pd.DataFrame, 
       
       # Update holdings and cash based on trade action
       if action in ["buy"] \
-         and (strategy_doc["amount_cash"] - quantity * current_price > rank_liquidity_limit) \
+         and (account_cash - quantity * current_price > rank_liquidity_limit) \
                and ((portfolio_qty + quantity) * current_price) / total_portfolio_value < rank_asset_limit:
          
          logging.info(f"Action: {action} | Ticker: {ticker} | Quantity: {quantity} | Price: {current_price}")
@@ -125,7 +141,9 @@ def simulate_trade(ticker:str, strategy:callable, historical_data:pd.DataFrame, 
          )
       
 
-      elif action in ["sell"] and str(ticker) in holdings_doc and holdings_doc[str(ticker)]["quantity"] > 0:
+      elif action in ["sell"] \
+         and str(ticker) in holdings_doc \
+            and holdings_doc[str(ticker)]["quantity"] > 0:
          
          logging.info(f"Action: {action} | Ticker: {ticker} | Quantity: {quantity} | Price: {current_price}")
          current_qty = holdings_doc[ticker]["quantity"]
@@ -161,7 +179,7 @@ def simulate_trade(ticker:str, strategy:callable, historical_data:pd.DataFrame, 
                {"strategy": strategy.__name__},
                {"$inc": {"neutral_trades": 1}}
                )
-               
+            
             else:
                holdings_collection.update_one(
                {"strategy": strategy.__name__},
@@ -187,7 +205,7 @@ def simulate_trade(ticker:str, strategy:callable, historical_data:pd.DataFrame, 
             },
             upsert=True
          )
-         if holdings_doc[ticker]["quantity"] == 0:      
+         if holdings_doc[ticker]["quantity"] == 0:
             del holdings_doc[ticker]
          
          # Update cash after selling
@@ -206,9 +224,9 @@ def simulate_trade(ticker:str, strategy:callable, historical_data:pd.DataFrame, 
 
                
          # Remove the ticker if quantity reaches zero
-         if holdings_doc[ticker]["quantity"] == 0:      
+         if holdings_doc[ticker]["quantity"] == 0:
                del holdings_doc[ticker]
-               
+
       else:
          logging.info(f"Action: {action} | Ticker: {ticker} | Quantity: {quantity} | Price: {current_price}")
       print(f"Action: {action} | Ticker: {ticker} | Quantity: {quantity} | Price: {current_price}")
