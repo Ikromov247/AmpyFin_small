@@ -198,7 +198,7 @@ def MIDPOINT_indicator(ticker:str, data:pd.DataFrame)->str:
   
 def MIDPRICE_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Midpoint Price over period (MIDPRICE) indicator."""  
-      
+   
    midprice = ta.MIDPRICE(data['high'], data['low'], timeperiod=14)  
    if data['close'].iloc[-1] > midprice.iloc[-1]:  
       return 'buy'  
@@ -388,7 +388,7 @@ def DX_indicator(ticker:str, data:pd.DataFrame)->str:
       return 'sell'  
    else:  
       return 'hold'  
-  
+
 def MACD_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Moving Average Convergence/Divergence (MACD) indicator."""  
       
@@ -446,10 +446,10 @@ def MINUS_DI_indicator(ticker:str, data:pd.DataFrame)->str:
   
 def MINUS_DM_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Minus Directional Movement (MINUS_DM) indicator."""  
-      
+   
    minus_dm = ta.MINUS_DM(data['high'], data['low'], timeperiod=14)  
    if minus_dm.iloc[-1] > 0:  
-      return 'sell'  
+      return 'sell'
    elif minus_dm.iloc[-1] < 0:  
       return 'buy'  
    else:  
@@ -596,7 +596,7 @@ def TRIX_indicator(ticker:str, data:pd.DataFrame)->str:
    elif trix.iloc[-1] < 0:  
       return 'sell'  
    else:  
-      return 'hold'  
+      return 'hold'
   
 def ULTOSC_indicator(ticker:str, data:pd.DataFrame)->str:  
    """Ultimate Oscillator (ULTOSC) indicator."""  
